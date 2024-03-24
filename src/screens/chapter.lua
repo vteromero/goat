@@ -19,8 +19,8 @@ function init_chintro()
       line(0,self.y0,127,self.y0,0)
       line(0,self.y1,127,self.y1,0)
       if self.showtext then
-        cprint(self.chtext,57,4)
-        cprint(chapter_title,66,9)
+        mprint(self.chtext,xcenter(),57,4)
+        mprint(chapter_title,xcenter(),66,9)
       end
     end
   })
@@ -59,7 +59,7 @@ end
 function upd_chapter()
   if chapter_moves==0 then
     if chapter==#chapters then
-      set_gstate("game_won1")
+      set_gstate("gwon_fadein")
     else
       set_chapter(chapter+1)
     end
@@ -74,7 +74,7 @@ function upd_chapter()
       update_stastreak()
     end
     if dead then
-      set_gstate("game_over1")
+      set_gstate("gover_fadein")
     else
       update_player()
       update_board()

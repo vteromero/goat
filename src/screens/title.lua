@@ -50,13 +50,10 @@ function drw_title1()
   draw_title()
   draw_subtitle()
   if blink<25 then
-    cprint("press ❎ to start",90,14)
-  end
-  if highscore>0 then
-    cprint("HISCORE: "..highscore,3,1)
+    mprint("press ❎ to start",xcenter(),90,14)
   end
   print("BY vICENTE rOMERO",2,121,1)
-  rprint(version,125,121,1)
+  mprint(version,xright(125),121,1)
 end
 
 function init_title2()
@@ -162,5 +159,5 @@ function draw_title(sh)
 end
 
 function draw_subtitle()
-  cprint("(gOAT oN a tOWER)",65,4)
+  mprint("(gOAT oN a tOWER)",xcenter(),65,4)
 end

@@ -1,13 +1,13 @@
-function init_gover1()
+function init_goverfadein()
   goverchars=split2d[[
-    160,-34,26,38,30,30|
-    161,-25,35,38,30,30|
-    162,-16,44,38,30,30|
-    163,-7,53,38,30,30|
-    164,128,69,38,30,30|
-    165,137,78,38,30,30|
-    163,146,87,38,30,30|
-    166,155,96,38,30,30
+    160,-34,26,23,30,30|
+    161,-25,35,23,30,30|
+    162,-16,44,23,30,30|
+    163,-7,53,23,30,30|
+    164,128,69,23,30,30|
+    165,137,78,23,30,30|
+    163,146,87,23,30,30|
+    166,155,96,23,30,30
   ]]
   fadeani=create_fadeani(0,50,goverfade1)
   govercharanis={}
@@ -28,64 +28,76 @@ function init_gover1()
       end
     }))
   end
-  if score>highscore then
-    highscore=score
-    dset(0,highscore)
-  end
+  scorepos=get_highscorepos(score)
   music(-1,3000)
   sfx(9)
 end
 
-function upd_gover1()
+function upd_goverfadein()
   update_goverbg()
   fadeani=update_ani(fadeani) and fadeani or nil
   update_anis(govercharanis)
   if not fadeani and #govercharanis==0 then
-    set_gstate("game_over2")
+    set_gstate(scorepos>0 and "gover_input" or "gover_hscores")
   end
 end
 
-function drw_gover1()
+function drw_goverfadein()
   draw_goverbg()
   draw_anis(govercharanis)
 end
 
-function init_gover2()
+function init_goverinput()
+  init_inputinitials()
+end
+
+function upd_goverinput()
+  local initials=update_inputinitials()
+  if initials then
+    add_highscore(initials,score,scorepos)
+    set_gstate("gover_hscores")
+  end
+  update_goverbg()
+end
+
+function drw_goverinput()
+  draw_goverbg()
+  draw_govertitle()
+  draw_inputinitials(score,6,1)
+end
+
+function init_goverhscores()
   blink=0
 end
 
-function upd_gover2()
+function upd_goverhscores()
   if btnp(5) then
-    set_gstate("game_over3")
+    set_gstate("gover_fadeout")
   end
   update_goverbg()
   blink=(blink+1)%50
 end
 
-function drw_gover2()
+function drw_goverhscores()
   draw_goverbg()
   draw_govertitle()
-  draw_goverscores()
+  draw_highscores(6,1,14,scorepos)
   if blink<25 then
-    print_shadow("press ❎",xcprint("press ❎"),90,6,1)
+    mprint("press ❎",xcenter(),100,6,1)
   end
 end
 
-function init_gover3()
+function init_goverfadeout()
   fadeani=create_fadeani(0,20,goverfade2)
 end
 
-function upd_gover3()
-  update_goverbg()
+function upd_goverfadeout()
   if not update_ani(fadeani) then
     set_gstate("title0")
   end
 end
 
-function drw_gover3()
-  draw_goverbg()
-  draw_govertitle()
-  draw_goverscores()
+function drw_goverfadeout()
 end
 
 function update_goverbg()
@@ -131,11 +143,4 @@ function draw_sproutline(si,x,y)
     end
   end
   pal(colorpali)
-end
-
-function draw_goverscores()
-  print_2tone_shadow("YOUR SCORE:",26,60,6,8,1)
-  print_2tone_shadow("HIGH SCORE:",26,70,6,8,1)
-  print_2tone_shadow(tostr(score),xrprint(tostr(score),102),60,6,8,1)
-  print_2tone_shadow(tostr(highscore),xrprint(tostr(highscore),102),70,6,8,1)
 end

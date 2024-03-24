@@ -1,4 +1,4 @@
-function init_gwon1()
+function init_gwonfadein()
   gwonfade1=split2d[[
     129,130,3,131,133,134,15,141,134,10,11,130,141,134,134,0|
     129,130,3,131,133,5,134,141,5,10,11,130,141,5,134,0|
@@ -12,12 +12,12 @@ function init_gwon1()
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
   ]]
   gwonchars=split2d[[
-    176,38,38|
-    177,46,38|
-    178,54,38|
-    179,70,38|
-    180,78,38|
-    181,85,38
+    176,38,23|
+    177,46,23|
+    178,54,23|
+    179,70,23|
+    180,78,23|
+    181,85,23
   ]]
   gwonanis={}
   fadeani=create_fadeani(30,50,gwonfade1)
@@ -57,66 +57,78 @@ function init_gwon1()
       end
     end
   end
-  if score>highscore then
-    highscore=score
-    dset(0,highscore)
-  end
+  gwontitlefr=0
+  scorepos=get_highscorepos(score)
   music(-1,3000)
   sfx(10)
 end
 
-function upd_gwon1()
+function upd_gwonfadein()
   update_gwonbg()
   update_anis(gwonanis)
   if #gwonanis==0 then
-    set_gstate("game_won2")
+    set_gstate(scorepos>0 and "gwon_input" or "gwon_hscores")
   end
 end
 
-function drw_gwon1()
+function drw_gwonfadein()
   draw_gwonbg(fadeani.wait==0)
   draw_anis(gwonanis)
 end
 
-function init_gwon2()
-  gwontitlefr=0
+function init_gwoninput()
+  init_inputinitials()
+end
+
+function upd_gwoninput()
+  local initials=update_inputinitials()
+  if initials then
+    add_highscore(initials,score,scorepos)
+    set_gstate("gwon_hscores")
+  end
+  update_gwonbg()
+  gwontitlefr=(gwontitlefr+1)%100
+end
+
+function drw_gwoninput()
+  draw_gwonbg(true)
+  draw_gwontitle(gwontitlefr)
+  draw_inputinitials(score,10,1)
+end
+
+function init_gwonhscores()
   blink=0
 end
 
-function upd_gwon2()
+function upd_gwonhscores()
   if btnp(5) then
-    set_gstate("game_won3")
+    set_gstate("gwon_fadeout")
   end
   update_gwonbg()
   gwontitlefr=(gwontitlefr+1)%100
   blink=(blink+1)%50
 end
 
-function drw_gwon2()
+function drw_gwonhscores()
   draw_gwonbg(true)
   draw_gwontitle(gwontitlefr)
-  draw_gwonscores()
+  draw_highscores(10,1,11,scorepos)
   if blink<25 then
-    print_shadow("press ❎",xcprint("press ❎"),90,10,1)
+    mprint("press ❎",xcenter(),100,10,1)
   end
 end
 
-function init_gwon3()
+function init_gwonfadeout()
   fadeani=create_fadeani(0,20,gwonfade2)
 end
 
-function upd_gwon3()
+function upd_gwonfadeout()
   if not update_ani(fadeani) then
     set_gstate("title0")
   end
-  update_gwonbg()
-  gwontitlefr=(gwontitlefr+1)%100
 end
 
-function drw_gwon3()
-  draw_gwonbg(true)
-  draw_gwontitle(gwontitlefr)
-  draw_gwonscores()
+function drw_gwonfadeout()
 end
 
 function update_gwonbg()
@@ -155,16 +167,9 @@ function draw_gwontitle(fr)
     local ch=gwonchars[i]
     local si,x,y=unpack(ch)
     local t=mid(0,fr-(i-1)*5,30)/30
-    local xx=x+2*cos(t)
+    local xx=x-2*cos(t)
     local yy=y+2*sin(t)
     draw_sproutline(si,xx,yy)
     spr(si,xx,yy)
   end
-end
-
-function draw_gwonscores()
-  print_2tone_shadow("YOUR SCORE:",26,60,10,3,1)
-  print_2tone_shadow("HIGH SCORE:",26,70,10,3,1)
-  print_2tone_shadow(tostr(score),xrprint(tostr(score),102),60,10,3,1)
-  print_2tone_shadow(tostr(highscore),xrprint(tostr(highscore),102),70,10,3,1)
 end

@@ -18,7 +18,8 @@ function draw_hud(opts)
   draw_powerups()
   draw_hp()
   if opts.showtitle then
-    outlined(chapter_title,xcprint(chapter_title,39,101),2,2,9)
+    local x=71-#chapter_title*2
+    mprint(chapter_title,x,2,9,poutline(2))
   end
   if opts.showscore then
     print("MOVES",3,110,6)

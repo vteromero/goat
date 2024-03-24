@@ -98,7 +98,7 @@ function spawn_scorepopup(x,y,val,c0,c1)
       self.y-=0.5
     end,
     drw=function(self)
-      print_2tone(self.s,self.x,self.y,self.c0,self.c1)
+      mprint(self.s,self.x,self.y,self.c0,nil,self.c1)
     end
   }))
 end

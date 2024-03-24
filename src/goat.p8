@@ -13,6 +13,7 @@ __lua__
 #include hud.lua
 #include ani.lua
 #include bg.lua
+#include highscores.lua
 #include screens/title.lua
 #include screens/chapter.lua
 #include screens/gameover.lua
