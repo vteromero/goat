@@ -6,13 +6,13 @@ function _init()
   alldarkbluecpal=split"1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
   alldarkredcpal=split"2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2"
   redflashcpal=split"8,2,2,2,8,14,14,8,8,8,8,8,13,14,14,2"
-  titlecpal=split"1,130,3,4,5,6,7,8,9,10,11,12,13,134,15,0"
   dir2dr=split"0,0,-1,1"
   dir2dc=split"-1,1,0,0"
   gstates={
-    title0={init_title0,upd_title0,drw_title0},
-    title1={init_title1,upd_title1,drw_title1},
-    title2={init_title2,upd_title2,drw_title2},
+    title_fadein={init_titlefadein,upd_titlefadein,drw_titlefadein},
+    title_main={init_titlemain,upd_titlemain,drw_titlemain},
+    title_hscores={init_titlehscores,upd_titlehscores,drw_titlehscores},
+    title_trans={init_titletrans,upd_titletrans,drw_titletrans},
     chapter_intro={init_chintro,upd_chintro,drw_chintro},
     chapter={init_chapter,upd_chapter,drw_chapter},
     gover_fadein={init_goverfadein,upd_goverfadein,drw_goverfadein},
@@ -28,7 +28,7 @@ function _init()
   init_bg()
   init_particles()
   set_colorpal(dfltcpal)
-  set_gstate("title1")
+  set_gstate("title_fadein")
 end
 
 function _update60()
@@ -84,6 +84,10 @@ end
 function easeoutquad(t)
   t-=1
   return 1-t*t
+end
+
+function round(x)
+  return flr(x+0.5)
 end
 
 function poutline(c)

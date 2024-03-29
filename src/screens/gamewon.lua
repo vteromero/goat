@@ -124,7 +124,7 @@ end
 
 function upd_gwonfadeout()
   if not update_ani(fadeani) then
-    set_gstate("title0")
+    set_gstate("title_fadein")
   end
 end
 
