@@ -1,6 +1,6 @@
 function _init()
-  version="V1.0"
-  cartdata("vteromero_goat")
+  version="V1.1"
+  cartdata("vteromero_goat_1_1")
   dfltcpal=split"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0"
   dfltbgcols=split"12,7,6,1,0"
   alldarkbluecpal=split"1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
