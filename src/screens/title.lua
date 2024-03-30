@@ -11,6 +11,7 @@ function init_titlefadein()
   bgcols=dfltbgcols
   set_bgani(nil)
   init_idlegoat()
+  menuitem(1,"reset scores",reset_scores)
   music(16)
 end
 
@@ -102,7 +103,7 @@ function drw_titlehscores()
   draw_highscores(15,2)
   if trstate==1 then
     mprint("⬅️",4+round(2*sin(swing/60)),3,15,2)
-    mprint("back",14,3,15,2)
+    mprint("back",15,3,15,2)
   end
 end
 

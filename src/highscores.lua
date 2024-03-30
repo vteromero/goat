@@ -3,11 +3,7 @@ function init_highscores()
   hscorecharsnav=calculate_charsnav(hscorechars)
   hscoretbtmpl=split2d"go-,10000|ont,8000|a-o,5000|t-w,3000|-ae,2000|--r,1000"
   if dget(0)==0 then
-    for i=1,#hscoretbtmpl do
-      local initials,score=unpack(hscoretbtmpl[i])
-      dset(i*2,pack_initials(initials))
-      dset(i*2+1,score)
-    end
+    reset_scores()
     dset(0,pack_initials("aaa"))
   end
 end
@@ -22,6 +18,14 @@ function draw_highscores(c0,c1,c2,hpos)
     mprint(tostr(i),35,y,c0,c1,c2)
     mprint(initials,43,y,c0,c1,c2)
     mprint(tostr(score),xright(90),y,c0,c1,c2)
+  end
+end
+
+function reset_scores()
+  for i=1,#hscoretbtmpl do
+    local initials,score=unpack(hscoretbtmpl[i])
+    dset(i*2,pack_initials(initials))
+    dset(i*2+1,score)
   end
 end
 

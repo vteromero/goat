@@ -24,6 +24,7 @@ function init_chintro()
       end
     end
   })
+  menuitem(1)
   music(0)
 end
 
