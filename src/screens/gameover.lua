@@ -1,4 +1,4 @@
-function init_goverfadein()
+function init_gover_fadein()
   goverchars=split2d[[
     160,-34,26,23,30,30|
     161,-25,35,23,30,30|
@@ -33,7 +33,7 @@ function init_goverfadein()
   sfx(9)
 end
 
-function upd_goverfadein()
+function upd_gover_fadein()
   update_goverbg()
   fadeani=update_ani(fadeani) and fadeani or nil
   update_anis(govercharanis)
@@ -42,16 +42,16 @@ function upd_goverfadein()
   end
 end
 
-function drw_goverfadein()
+function drw_gover_fadein()
   draw_goverbg()
   draw_anis(govercharanis)
 end
 
-function init_goverinput()
+function init_gover_input()
   init_inputinitials()
 end
 
-function upd_goverinput()
+function upd_gover_input()
   local initials=update_inputinitials()
   if initials then
     add_highscore(initials,score,scorepos)
@@ -60,17 +60,17 @@ function upd_goverinput()
   update_goverbg()
 end
 
-function drw_goverinput()
+function drw_gover_input()
   draw_goverbg()
   draw_govertitle()
   draw_inputinitials(score,6,1)
 end
 
-function init_goverhscores()
+function init_gover_hscores()
   blink=0
 end
 
-function upd_goverhscores()
+function upd_gover_hscores()
   if btnp(5) then
     set_gstate("gover_fadeout")
   end
@@ -78,7 +78,7 @@ function upd_goverhscores()
   blink=(blink+1)%50
 end
 
-function drw_goverhscores()
+function drw_gover_hscores()
   draw_goverbg()
   draw_govertitle()
   draw_highscores(6,1,14,scorepos)
@@ -87,17 +87,17 @@ function drw_goverhscores()
   end
 end
 
-function init_goverfadeout()
+function init_gover_fadeout()
   fadeani=create_fadeani(0,20,goverfade2)
 end
 
-function upd_goverfadeout()
+function upd_gover_fadeout()
   if not update_ani(fadeani) then
     set_gstate("title_fadein")
   end
 end
 
-function drw_goverfadeout()
+function drw_gover_fadeout()
 end
 
 function update_goverbg()

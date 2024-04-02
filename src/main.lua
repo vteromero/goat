@@ -8,22 +8,6 @@ function _init()
   redflashcpal=split"8,2,2,2,8,14,14,8,8,8,8,8,13,14,14,2"
   dir2dr=split"0,0,-1,1"
   dir2dc=split"-1,1,0,0"
-  gstates={
-    title_fadein={init_titlefadein,upd_titlefadein,drw_titlefadein},
-    title_main={init_titlemain,upd_titlemain,drw_titlemain},
-    title_hscores={init_titlehscores,upd_titlehscores,drw_titlehscores},
-    title_trans={init_titletrans,upd_titletrans,drw_titletrans},
-    chapter_intro={init_chintro,upd_chintro,drw_chintro},
-    chapter={init_chapter,upd_chapter,drw_chapter},
-    gover_fadein={init_goverfadein,upd_goverfadein,drw_goverfadein},
-    gover_input={init_goverinput,upd_goverinput,drw_goverinput},
-    gover_hscores={init_goverhscores,upd_goverhscores,drw_goverhscores},
-    gover_fadeout={init_goverfadeout,upd_goverfadeout,drw_goverfadeout},
-    gwon_fadein={init_gwonfadein,upd_gwonfadein,drw_gwonfadein},
-    gwon_input={init_gwoninput,upd_gwoninput,drw_gwoninput},
-    gwon_hscores={init_gwonhscores,upd_gwonhscores,drw_gwonhscores},
-    gwon_fadeout={init_gwonfadeout,upd_gwonfadeout,drw_gwonfadeout},
-  }
   init_highscores()
   init_bg()
   init_particles()
@@ -40,10 +24,9 @@ function _draw()
 end
 
 function set_gstate(st)
-  local init,drw,upd=unpack(gstates[st])
-  init()
-  _upd=upd
-  _drw=drw
+  _ENV["init_"..st]()
+  _upd=_ENV["upd_"..st]
+  _drw=_ENV["drw_"..st]
 end
 
 function set_colorpal(cpal)

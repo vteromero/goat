@@ -1,4 +1,4 @@
-function init_gwonfadein()
+function init_gwon_fadein()
   gwonfade1=split2d[[
     129,130,3,131,133,134,15,141,134,10,11,130,141,134,134,0|
     129,130,3,131,133,5,134,141,5,10,11,130,141,5,134,0|
@@ -63,7 +63,7 @@ function init_gwonfadein()
   sfx(10)
 end
 
-function upd_gwonfadein()
+function upd_gwon_fadein()
   update_gwonbg()
   update_anis(gwonanis)
   if #gwonanis==0 then
@@ -71,16 +71,16 @@ function upd_gwonfadein()
   end
 end
 
-function drw_gwonfadein()
+function drw_gwon_fadein()
   draw_gwonbg(fadeani.wait==0)
   draw_anis(gwonanis)
 end
 
-function init_gwoninput()
+function init_gwon_input()
   init_inputinitials()
 end
 
-function upd_gwoninput()
+function upd_gwon_input()
   local initials=update_inputinitials()
   if initials then
     add_highscore(initials,score,scorepos)
@@ -90,17 +90,17 @@ function upd_gwoninput()
   gwontitlefr=(gwontitlefr+1)%100
 end
 
-function drw_gwoninput()
+function drw_gwon_input()
   draw_gwonbg(true)
   draw_gwontitle(gwontitlefr)
   draw_inputinitials(score,10,1)
 end
 
-function init_gwonhscores()
+function init_gwon_hscores()
   blink=0
 end
 
-function upd_gwonhscores()
+function upd_gwon_hscores()
   if btnp(5) then
     set_gstate("gwon_fadeout")
   end
@@ -109,7 +109,7 @@ function upd_gwonhscores()
   blink=(blink+1)%50
 end
 
-function drw_gwonhscores()
+function drw_gwon_hscores()
   draw_gwonbg(true)
   draw_gwontitle(gwontitlefr)
   draw_highscores(10,1,11,scorepos)
@@ -118,17 +118,17 @@ function drw_gwonhscores()
   end
 end
 
-function init_gwonfadeout()
+function init_gwon_fadeout()
   fadeani=create_fadeani(0,20,gwonfade2)
 end
 
-function upd_gwonfadeout()
+function upd_gwon_fadeout()
   if not update_ani(fadeani) then
     set_gstate("title_fadein")
   end
 end
 
-function drw_gwonfadeout()
+function drw_gwon_fadeout()
 end
 
 function update_gwonbg()

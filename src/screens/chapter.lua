@@ -1,4 +1,4 @@
-function init_chintro()
+function init_chapter_intro()
   chintroani=create_ani(0,160,{
     y0=64,
     y1=64,
@@ -28,7 +28,7 @@ function init_chintro()
   music(0)
 end
 
-function upd_chintro()
+function upd_chapter_intro()
   if update_ani(chintroani) then
     update_player()
     update_board()
@@ -41,7 +41,7 @@ function upd_chintro()
   end
 end
 
-function drw_chintro()
+function drw_chapter_intro()
   draw_bg()
   draw_board()
   draw_player()

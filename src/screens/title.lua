@@ -1,4 +1,4 @@
-function init_titlefadein()
+function init_title_fadein()
   titlefade=split2d[[
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0|
     129,128,128,128,128,128,130,128,128,128,128,128,128,128,130,0|
@@ -15,7 +15,7 @@ function init_titlefadein()
   music(16)
 end
 
-function upd_titlefadein()
+function upd_title_fadein()
   if not update_ani(fadeani) then
     set_gstate("title_main")
   end
@@ -23,19 +23,19 @@ function upd_titlefadein()
   update_bg()
 end
 
-function drw_titlefadein()
+function drw_title_fadein()
   draw_bg({mounty=50,towery=128})
   draw_idlegoat()
   draw_title()
   draw_subtitle()
 end
 
-function init_titlemain()
+function init_title_main()
   blink=0
   swing=0
 end
 
-function upd_titlemain()
+function upd_title_main()
   if btnp(5) then
     set_gstate("title_trans")
   end
@@ -48,7 +48,7 @@ function upd_titlemain()
   swing=(swing+1)%60
 end
 
-function drw_titlemain()
+function drw_title_main()
   draw_bg({mounty=50,towery=128})
   draw_idlegoat()
   draw_title()
@@ -62,14 +62,14 @@ function drw_titlemain()
   mprint(version,xright(125),121,1)
 end
 
-function init_titlehscores()
+function init_title_hscores()
   slideage=40
   slidefr=0
   camx=0
   trstate=0
 end
 
-function upd_titlehscores()
+function upd_title_hscores()
   if trstate==0 then
     slidefr+=1
     if slidefr==slideage then
@@ -92,7 +92,7 @@ function upd_titlehscores()
   swing=(swing+1)%60
 end
 
-function drw_titlehscores()
+function drw_title_hscores()
   camera()
   draw_bg({mounty=50,towery=128})
   camera(camx,0)
@@ -107,7 +107,7 @@ function drw_titlehscores()
   end
 end
 
-function init_titletrans()
+function init_title_trans()
   titleani=create_ani(0,70,{
     h=12,
     upd=function(self,t)
@@ -160,7 +160,7 @@ function init_titletrans()
   music(-1,2000)
 end
 
-function upd_titletrans()
+function upd_title_trans()
   titleani=update_ani(titleani) and titleani or nil
   scroll1ani=update_ani(scroll1ani) and scroll1ani or nil
   scroll2ani=update_ani(scroll2ani) and scroll2ani or nil
@@ -172,7 +172,7 @@ function upd_titletrans()
   update_particles()
 end
 
-function drw_titletrans()
+function drw_title_trans()
   draw_bg({
     towery=scroll1ani and scroll1ani.y,
     mounty=scroll2ani and scroll2ani.y,
